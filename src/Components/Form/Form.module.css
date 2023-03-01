@@ -21,4 +21,15 @@
     font-size: 20px;
     margin-top: 2.2rem;
     border: none;
+    cursor: pointer;
+}
+
+.btnSubmit:hover {
+    filter: brightness(80%);
+    transition: filter 150ms ease-in-out;
+}
+
+.btnSubmit:not(:hover) {
+    filter: brightness(1);
+    transition: filter 150ms ease-in-out;
 }
