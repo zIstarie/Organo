@@ -1,0 +1,24 @@
+.form {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0;
+}
+
+.form form {
+    max-width: 80%;
+    background-color: #f2f2f2;
+    border-radius: 1.2em;
+    padding: 2.25rem 4rem;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.btnSubmit {
+    width: 10.4rem;
+    height: 5rem;
+    background-color: #6278F7;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 2.2rem;
+    border: none;
+}
