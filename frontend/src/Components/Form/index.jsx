@@ -2,15 +2,16 @@ import styles from './Form.module.css';
 import { TextInput } from '../TextInput';
 import { SelectDropdown } from '../SelectDropdown';
 import { useEffect, useState } from 'react';
+// import { userService } from '../../Services/UserService';
 
 export const Form = () => {
     const [items, setItems] = useState([]);
     const [name, setName] = useState('');
     const [role, setRole] = useState('');
     const [image, setImage] = useState('');
-    const [team, setTeam] = useState('');
+    const [team, setTeam] = useState(0);
     
-    async function fetchData() {
+    const fetchData = async () => {
         await fetch('https://jsonplaceholder.typicode.com/albums')
             .then(async res => await res.json())
             .then(teams => setItems(teams.map(team => ({ id: team.id, name: team.title }))))
@@ -25,7 +26,7 @@ export const Form = () => {
             image: image,
             team: team
         };
-        console.log(data);
+        console.table(data);
     }
 
     useEffect(() => {
