@@ -10,7 +10,7 @@ export const SelectDropdown = ({ label, placeholder, options, onClick }) => {
         <option value="" key="" selected disabled>{ placeholder }</option>
         {options.map(option => {
           return (
-            <option key={option.id} value={option.name} onClick={onClick} >
+            <option key={option.id} value={option.id} onClick={onClick} >
               { option.name }
             </option>
           )
