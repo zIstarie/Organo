@@ -2,6 +2,7 @@ import styles from './Form.module.css';
 import { TextInput } from '../TextInput';
 import { SelectDropdown } from '../SelectDropdown';
 import { useEffect, useState } from 'react';
+import 'dotenv/config';
 
 export const Form = () => {
     const [items, setItems] = useState([]);
