@@ -1,0 +1,22 @@
+{
+  "name": "organo",
+  "version": "1.0.0",
+  "description": "https://www.figma.com/file/T6BLI1HfB81eYOiVgpqQz7/Projeto-Intro-ao-React?node-id=134%3A143&t=H5IQIS3XmOlt08u3-0",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend/ && npm run build",
+    "serve": "cd backend/ && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zIstarie/Organo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zIstarie/Organo/issues"
+  },
+  "homepage": "https://github.com/zIstarie/Organo#readme"
+}
