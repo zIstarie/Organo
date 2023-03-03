@@ -2,6 +2,7 @@ import styles from './Form.module.css';
 import { TextInput } from '../TextInput';
 import { SelectDropdown } from '../SelectDropdown';
 import { useEffect, useState } from 'react';
+import 'dotenv/config';
 
 export const Form = () => {
     const [items, setItems] = useState([]);
@@ -11,7 +12,7 @@ export const Form = () => {
     const [team, setTeam] = useState(0);
     
     const fetchData = async () => {
-        await fetch('http://localhost:8080/api/teams')
+        await fetch(`${process.env.BACKEND_URL}/api/teams`)
             .then(async res => await res.json())
             .then(teams => setItems(teams.map(team => ({ id: team.id, name: team.nome }))))
             .catch(err => console.log(err.message));
