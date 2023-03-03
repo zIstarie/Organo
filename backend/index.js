@@ -1,7 +1,6 @@
 import express from 'express';
 import { getTeams } from './lib/database.js';
 import 'dotenv/config.js';
-const PORT = 8080;
 
 const app = express();
 app.use((req, res, next) => {
@@ -18,5 +17,4 @@ app.get('/api/teams', async (req, res) => {
   teams && res.status(200).send([...teams]);
 });
 
-app.listen(PORT, () => console.log(`Connected to ${process.env.BACKEND_URL}:${PORT}`));
-
+app.listen(process.env.HOST_PORT, () => console.log(`Connected to ${process.env.HOST_URL}:${process.env.HOST_PORT}`));
