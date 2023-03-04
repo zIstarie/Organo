@@ -11,7 +11,6 @@ export const Form = () => {
     const [team, setTeam] = useState(0);
     
     const fetchData = async () => {
-        console.log(import.meta.env.BACKEND_URL);
         await fetch(`${import.meta.env.BACKEND_URL}/api/teams`)
             .then(async res => await res.json())
             .then(teams => setItems(teams.map(team => ({ id: team.id, name: team.nome }))))
