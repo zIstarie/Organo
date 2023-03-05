@@ -15,6 +15,8 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "sqlite3": "^5.1.4"
+    "pocketbase": "^0.12.0",
+    "sqlite3": "^5.1.4",
+    "zod": "^3.20.6"
   }
 }

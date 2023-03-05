@@ -1,47 +1,35 @@
-import sqlite3 from "sqlite3";
+import PocketBase from 'pocketbase';
 
-const dbInstance = new sqlite3.Database('lib/database.sqlite', sqlite3.OPEN_READWRITE, err => console.log(err ? err.message : 'Connected to the database'));
+const pb = new PocketBase('http://127.0.0.1:8090');
+pb.autoCancellation(false);
 
 async function createTeam({ name, theme }) {
-  const createRecord = new Promise((resolve, reject) => {
-    return dbInstance.run('INSERT INTO times(nome, tema) VALUES (?, ?))', [data.name, data.theme], err => !err ?
-      resolve(this.lastID) :
-      reject(err.message));
-  });
+  const team = await pb.collection('times').create({ nome: name, tema: theme });
 
-  return await createRecord
-    .then(res => res)
-    .catch(err => console.log(err));
+  return team;
 }
 
 async function getTeams() {
-  const getRecords = new Promise((resolve, reject) => {
-    return dbInstance.all('SELECT * FROM times', [], (err, rows) => {
-      if (err) return reject(err.message);
+  const teams = await pb.collection('times').getFullList();
 
-      resolve(rows);
-    });
-  });
-
-  return await getRecords
-    .then(res => res)
-    .catch(err => console.log(err));
+  return teams;
 }
 
-async function createUser({ teamId, name, role, image }) {
-  const createRecord = new Promise((resolve, reject) => {
-    return dbInstance.run('INSERT INTO users(time_id, nome, cargo, url_imagem) VALUES (?, ?, ?, ?))', [teamId, name, role, image], err => !err ?
-      resolve(this.lastID) :
-      reject(err.message));
-  });
+async function createUser({ name, role, teamId, image = null }) {
+  const user = await pb.collection('users').create({ nome: name, cargo: role, time_id: teamId, url_imagem: image });
 
-  return await createRecord
-    .then(res => res)
-    .catch(err => console.log(err.message));
+  return user;
+}
+
+async function getUser(id) {
+  const user = await pb.collection('users').getOne(id);
+
+  return user;
 }
 
 export {
   createTeam,
   getTeams,
-  createUser
+  createUser,
+  getUser
 };

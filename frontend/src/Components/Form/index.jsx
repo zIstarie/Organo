@@ -13,19 +13,34 @@ export const Form = () => {
     const fetchData = async () => {
         await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/teams`)
             .then(async res => await res.json())
-            .then(teams => setItems(teams.map(team => ({ id: team.id, name: team.nome }))))
+            .then(teams => setItems(teams.map(team => ({ id: team.id, name: team.name }))))
             .catch(err => console.log(err.message));
     }
 
-    const handleSubmit = event => {
+    const handleChange = event => {
+        const index = event.target.selectedIndex;
+
+        setTeam(event.target[index].value);
+    }
+
+    const handleSubmit = async event => {
         event.preventDefault();
         const data = {
             name: name,
             role: role,
             image: image,
-            team: team
+            teamId: team
         };
-        console.table(data);
+        const user = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+          .then(async res => await res.json())
+          .then(res => console.log('Success'))
+          .catch(err => console.log(err));
     }
 
     useEffect(() => {
@@ -43,7 +58,7 @@ export const Form = () => {
                     label="Times"
                     placeholder="Selecione o Time"
                     options={items}
-                    onClick={e => setTeam(e.target.value)}
+                    onChange={handleChange}
                 />
                 <button type='submit' className={styles.btnSubmit} >Criar Card</button>
             </form>
