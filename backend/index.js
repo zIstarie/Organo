@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTeams, createUser, getUser, createTeam } from './lib/database.js';
+import { createTeam, getTeams, createUser, getUser } from './lib/database.js';
 import { userBodySchema, teamBodySchema } from './utils/schemas.js';
 import 'dotenv/config.js';
 
@@ -31,7 +31,12 @@ app.post('/api/register', async (req, res) => {
   const body = userBodySchema.safeParse(req.body);
   if (!body.success) return res.status(405).send({ message: `Invalid request body. Message: ${body.error}` });
   
-  const user = await createUser({ ...body.data });
+  const user = await createUser({
+    ...body.data,
+    image: body.data.image !== '' ?
+      body.data.image :
+      null
+  });
   user && res.status(200).send({ ...user });
 });
 
@@ -50,5 +55,5 @@ app.get('/api/user/:id', async (req, res) => {
   user && res.status(200).send({ ...user });
 });
 
-app.listen(PORT, () => console.log(`Connected to ${process.env.HOST_URL}:${PORT}`));
+app.listen(PORT, () => console.log(`Connection alive on http://localhost:${PORT}`));
 

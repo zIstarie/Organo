@@ -3,11 +3,10 @@ import { z } from 'zod';
 const userSchema = z.object({
   name: z.string().min(9).max(150),
   role: z.string(),
-  teamId: z.string(),
+  teamId: z.number(),
   image: z.string().url().or(z.literal("")).or(z.undefined())
 });
-
-export const userBodySchema = userSchema.partial({
+const userBodySchema = userSchema.partial({
   image: true
 });
 
@@ -20,8 +19,12 @@ const teamSchema = z.object({
     'purple',
     'yellow',
     'white',
-    'black'
+    'black',
   ])
 });
+const teamBodySchema = teamSchema.required();
 
-export const teamBodySchema = teamSchema.required();
+export {
+  userBodySchema,
+  teamBodySchema
+};
